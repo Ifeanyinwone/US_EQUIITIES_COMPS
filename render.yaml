@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: equity-comps
+    runtime: python
+    plan: free
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt && cd frontend && npm ci && npm run build
+    startCommand: uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    initialDeployHook: python scripts/seed.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.10"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: equity-comps-db
+          property: connectionString
+      - key: SYNC_DATABASE_URL
+        fromDatabase:
+          name: equity-comps-db
+          property: connectionString
+      - key: CORS_ORIGINS
+        value: '["*"]'
+      - key: MARKET_REFRESH_INTERVAL
+        value: "300"
+      - key: FINANCIALS_REFRESH_HOUR
+        value: "2"
+      - key: LOG_LEVEL
+        value: "INFO"
+      - key: YF_REQUEST_DELAY
+        value: "1.5"
+      - key: YF_BATCH_DELAY
+        value: "3.0"
+      - key: YF_MAX_RETRIES
+        value: "3"
+      - key: YF_CONCURRENCY
+        value: "2"
+      - key: YF_COOLDOWN_PERIOD
+        value: "30.0"
+
+databases:
+  - name: equity-comps-db
+    plan: free
+    postgresMajorVersion: "16"
