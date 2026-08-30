@@ -1,0 +1,32 @@
+{
+  "name": "equity-comps-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.40.0",
+    "ag-grid-community": "^31.3.2",
+    "ag-grid-react": "^31.3.2",
+    "axios": "^1.7.2",
+    "lucide-react": "^0.383.0",
+    "numeral": "^2.0.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "react-select": "^5.8.0",
+    "recharts": "^2.12.7"
+  },
+  "devDependencies": {
+    "@types/numeral": "^2.0.5",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
+  }
+}
